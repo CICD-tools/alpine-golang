@@ -14,8 +14,8 @@ clean:
 	docker rmi ${NAME} &>/dev/null || true
 
 build: clean
-	docker build --pull=true --no-cache -t ${NAME}:${RELEASE} .
-	docker tag -f ${NAME}:${RELEASE} ${NAME}:latest
+	docker build --pull=true --no-cache -t ${USER}/${NAME}:${RELEASE} .
+	docker tag -f ${USER}/${NAME}:${RELEASE} ${USER}/${NAME}:latest
 
 # Using internal registry
 #	docker build --pull=true --no-cache -t ${REGISTRY}/${NAME}:${RELEASE} .
