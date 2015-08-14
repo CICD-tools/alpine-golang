@@ -22,7 +22,7 @@ build: clean
 #	docker tag -f ${REGISTRY}/${NAME}:${RELEASE} ${REGISTRY}/${NAME}:latest
 
 push: build
-	docker login
+	docker login -u ${USER}
 	docker push ${USER}/${NAME}:${RELEASE}
 	docker push ${USER}/${NAME}:latest
 
