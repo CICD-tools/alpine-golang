@@ -4,8 +4,6 @@ USER=mickep76
 
 # Using internal registry
 #USER=myuser
-#PASS=mypass
-#MAIL=noreply@example.com
 #REGISTRY=docker-registry.example.com:8080
 
 all: push
@@ -27,6 +25,6 @@ push: build
 	docker push ${USER}/${NAME}:latest
 
 # Using internal registry
-#	docker login -u ${USER} -p '${PASS}' -e ${MAIL} ${REGISTRY}
+#	docker login -u ${USER} ${REGISTRY}
 #	docker push ${REGISTRY}/${NAME}:${RELEASE}
 #	docker push ${REGISTRY}/${NAME}:latest
