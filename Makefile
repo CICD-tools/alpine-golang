@@ -1,5 +1,7 @@
 NAME:=$(shell basename `git rev-parse --show-toplevel`)
 RELEASE:=$(shell git rev-parse --verify --short HEAD)
+
+# Using internal registry
 #USER=myuser
 #PASS=mypass
 #MAIL=noreply@example.com
@@ -11,10 +13,16 @@ clean:
 	docker rmi ${NAME} &>/dev/null || true
 
 build: clean
-	docker build --pull=true --no-cache -t ${REGISTRY}/${NAME}:${RELEASE} .
-	docker tag -f ${REGISTRY}/${NAME}:${RELEASE} ${REGISTRY}/${NAME}:latest
+	docker build --pull=true --no-cache -t ${NAME}:${RELEASE} .
+	docker tag -f ${NAME}:${RELEASE} ${NAME}:latest
+
+# Using internal registry
+#	docker build --pull=true --no-cache -t ${REGISTRY}/${NAME}:${RELEASE} .
+#	docker tag -f ${REGISTRY}/${NAME}:${RELEASE} ${REGISTRY}/${NAME}:latest
 
 push: build
+
+# Using internal registry
 #	docker login -u ${USER} -p '${PASS}' -e ${MAIL} ${REGISTRY}
 #	docker push ${REGISTRY}/${NAME}:${RELEASE}
 #	docker push ${REGISTRY}/${NAME}:latest
