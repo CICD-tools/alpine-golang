@@ -1,3 +1,15 @@
+# Build Docker image
+
+```bash
+make
+```
+
+Or:
+
+```bash
+docker build --pull=true --no-cache -t alpine-golang:latest .
+```
+
 # Build using Docker container
 
 ```bash
