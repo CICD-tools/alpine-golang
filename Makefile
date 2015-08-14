@@ -1,5 +1,6 @@
 NAME:=$(shell basename `git rev-parse --show-toplevel`)
 RELEASE:=$(shell git rev-parse --verify --short HEAD)
+USER=mickep76
 
 # Using internal registry
 #USER=myuser
@@ -21,6 +22,9 @@ build: clean
 #	docker tag -f ${REGISTRY}/${NAME}:${RELEASE} ${REGISTRY}/${NAME}:latest
 
 push: build
+	docker login
+	docker push ${USER}/${NAME}:${RELEASE}
+	docker push ${USER}/${NAME}:latest
 
 # Using internal registry
 #	docker login -u ${USER} -p '${PASS}' -e ${MAIL} ${REGISTRY}
