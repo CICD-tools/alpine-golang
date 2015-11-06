@@ -1,20 +1,21 @@
 FROM gliderlabs/alpine
 
-RUN apk-install go git make docker ca-certificates
+RUN apk-install git make
 
-# Copy internal CA certificates
-#COPY rootfs/usr/local/share/ca-certificates/ /usr/local/share/ca-certificates
-#RUN update-ca-certificates
+RUN apk --update-cache --allow-untrusted \
+        --repository http://dl-4.alpinelinux.org/alpine/edge/community \
+        --arch=x86_64 add \
+    go \
+    && rm -rf /var/cache/apk/*
 
 # Configure Go
+ENV GOROOT /usr/lib/go
 ENV GOPATH /go
 ENV PATH /go/bin:$PATH
+ENV GO15VENDOREXPERIMENT 1
 
-# Install gb
-RUN mkdir -p ${GOPATH}/{src,bin} ;\
-    go get github.com/constabulary/gb/... ;\
-    mv /go/bin/gb /bin
+RUN mkdir -p ${GOPATH}/{src,bin}
 
-WORKDIR /go
+WORKDIR $GOPATH
 
 CMD ["make"]
