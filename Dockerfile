@@ -16,6 +16,9 @@ ENV GO15VENDOREXPERIMENT 1
 
 RUN mkdir -p ${GOPATH}/{src,bin}
 
+# Install GB
+RUN go get github.com/constabulary/gb/...
+
 WORKDIR $GOPATH
 
 CMD ["make"]
