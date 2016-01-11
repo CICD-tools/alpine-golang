@@ -14,10 +14,8 @@ ENV GOPATH /go
 ENV PATH /go/bin:$PATH
 ENV GO15VENDOREXPERIMENT 1
 
-RUN mkdir -p ${GOPATH}/{src,bin}
-
-# Install GB
-RUN go get github.com/constabulary/gb/...
+RUN mkdir -p ${GOPATH}/src ${GOPATH}/bin \
+    go get github.com/constabulary/gb/...
 
 WORKDIR $GOPATH
 
